@@ -1,17 +1,17 @@
-let numeroAleatorio = Math.floor(Math.random()* 100) + 1
+let numeroAleatorio = Math.floor(Math.random() * 100) + 1
 
 let palpites = document.querySelector(".palpites")
 let ultimoResultado = document.querySelector(".ultimoResultado")
 let baixoOuAlto = document.querySelector(".baixoOuAlto")
 
-let envioPalpite = document.querySelector(".envioPalpites")
-let campoPalpite = document.querySelector(".campoPalpites")
+let envioPalpite = document.querySelector(".envioPalpite")
+let campoPalpite = document.querySelector(".campoPalpite")
 
 let contagemPalpites = 1
 let botaoReinicio
 
-function conferirPalpites() {
-    let palpiteUsuario = Number(campoPlapite.value)
+function conferirPalpite() {
+    let palpiteUsuario = Number(campoPalpite.value)
     if (contagemPalpites === 1) {
         palpites.textContent = "Palpites anteriores: "
     }
@@ -39,4 +39,35 @@ function conferirPalpites() {
     contagemPalpites++
     campoPalpite.value = ""
     campoPalpite.focus()
+}
+
+envioPalpite.addEventListener("click", conferirPalpite) // Esse código cria uma chamada para função conferirPalpites() sem ter que criar um "onclick = conferirPalpites()" no HTML. obs: tem ser declarada fora dos colchetes.
+
+function configFimDeJogo() {
+    campoPalpite.disabled = true
+    envioPalpite.disabled = true
+    botaoReinicio = document.createElement("button")
+    botaoReinicio.textContent = "Iniciar novo jogo"
+    document.body.appendChild(botaoReinicio)
+    botaoReinicio.addEventListener("click", reiniciarJogo)
+}
+
+function reiniciarJogo() {
+    contagemPalpites = 1
+    
+    let reiniciarParas = document.querySelector(".resultadoParas p")
+    for (let i = 0; i < reiniciarParas.length; i++) {
+        reiniciarParas[i].textContent = ""
+    }
+
+    botaoReinicio.parentNode.removeChild(botaoReinicio)
+
+    campoPalpite.disabled = false
+    envioPalpite.disabled = false
+    campoPalpite.value = ""
+    campoPalpite.focus()
+
+    ultimoResultado.style.backgroundColor = "white"
+
+    numeroAleatorio = Math.floor(Math.random() * 100) + 1
 }
