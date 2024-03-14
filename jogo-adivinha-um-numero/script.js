@@ -55,7 +55,7 @@ function configFimDeJogo() {
 function reiniciarJogo() {
     contagemPalpites = 1
     
-    let reiniciarParas = document.querySelector(".resultadoParas p")
+    let reiniciarParas = document.querySelectorAll(".resultadoParas p")
     for (let i = 0; i < reiniciarParas.length; i++) {
         reiniciarParas[i].textContent = ""
     }
